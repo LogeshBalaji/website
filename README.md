@@ -26,6 +26,49 @@ Validate the HTML code.
 Publish the website in the given URL.
 
 # PROGRAM:
+## urls.py(server1) 
+~~~
+from django.urls import path  
+
+from.import views  
+
+urlpatterns=[  
+    path('',views.home,name='home')  
+]
+~~~ 
+## views.py(server1)  
+~~~
+from django.shortcuts import render    
+from django.http import HttpResponse  
+#Create your views here.  
+
+def home(request):  
+    return render(request, 'home.html') 
+content="""
+    """
+ class Myserver(BaseHTTPRequestHandler):
+    def do_GET(self):
+        print("Get request received...")
+        self.send_response(200)
+        self.send_header("content-type","text/html")
+        self.end_headers()
+        self.wfile.write(content.encode())
+print("This is my webserver")
+server_address =('',8000)
+Httpd = HTTPServer(server_address,Myserver)
+Httpd.serve_forever()
+~~~   
+## urls.py(server)
+~~~
+from django.contrib import admin  
+from django.urls import path,include  
+
+urlpatterns = [  
+    path('', include('server1.urls')),  
+    path('admin/', admin.site.urls),  
+]
+~~~
+## creating new folder templates in that new html file 'home'
 ~~~
 <!DOCTYPE html>
 <html lang="en">
@@ -286,14 +329,19 @@ Customer Satisfaction: Your feedback is important to us! Please let us know how 
     By dining with us, you acknowledge that you have read, understood, and agreed to these Terms and Conditions.</pre>
 ~~~
 # OUTPUT:
+
+![Screenshot 2024-12-06 110309](https://github.com/user-attachments/assets/71d9bb07-120e-4552-b389-6e9417dcd77d)
+
+![Screenshot 2024-12-06 110256](https://github.com/user-attachments/assets/8210c96d-86e5-457f-9b39-62477016bc72)
+
 ## WEBSITE 
-![Screenshot 2024-11-27 011711](https://github.com/user-attachments/assets/8ca9e3ac-c5a4-4b04-b39e-7f0fe3c1dfae)
 
+![Screenshot 2024-12-06 105702](https://github.com/user-attachments/assets/4b9b442c-6722-4dc5-bffc-7e17d94ad7df)
 
-![Screenshot 2024-11-27 011732](https://github.com/user-attachments/assets/9db8e6b2-2647-4478-904b-b4c8f8e5ea11)
+![Screenshot 2024-12-06 105651](https://github.com/user-attachments/assets/76bf69e0-2e94-47fa-83f0-9499026dbc95)
 
+![Screenshot 2024-12-06 105634](https://github.com/user-attachments/assets/cfaf76c6-346c-4164-908d-4af84996127a)
 
-![Screenshot 2024-11-27 011744](https://github.com/user-attachments/assets/fbd869a5-5336-4086-b5b7-99fe82bea6fd)
 
 ## POLICY
 ![Screenshot 2024-11-27 011755](https://github.com/user-attachments/assets/3d859fac-59fc-4421-9e3f-ba7b36e9fbe8)
